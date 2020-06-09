@@ -1,0 +1,13 @@
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+perlin_noise
+CMakeFiles
+cmake-build-debug
+*.cbp
+.idea/
+.vscode/
+tests/
+test/
+build
+.vs/
