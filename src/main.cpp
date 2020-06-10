@@ -34,10 +34,10 @@ int main()
             }
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-            perlinNoise.setPosition(sf::Vector2i(perlinNoise.getPosition().x - (speedMore ? speed * 2 : speed), perlinNoise.getPosition().y));
+            perlinNoise.setPosition(sf::Vector2i(perlinNoise.getPosition().x + (speedMore ? speed * 2 : speed), perlinNoise.getPosition().y));
             perlinNoise.calculateNoise();
         } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q)) {
-            perlinNoise.setPosition(sf::Vector2i(perlinNoise.getPosition().x + (speedMore ? speed * 2 : speed), perlinNoise.getPosition().y));
+            perlinNoise.setPosition(sf::Vector2i(perlinNoise.getPosition().x - (speedMore ? speed * 2 : speed), perlinNoise.getPosition().y));
             perlinNoise.calculateNoise();
         } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
             perlinNoise.setPosition(sf::Vector2i(perlinNoise.getPosition().x, perlinNoise.getPosition().y + (speedMore ? speed * 2 : speed)));

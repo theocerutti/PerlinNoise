@@ -18,15 +18,15 @@ PerlinNoise::PerlinNoise() : _engine(std::chrono::system_clock::now().time_since
 
 std::vector<Layer> colorLayers{
         // water
-        {sf::Color(0, 0,255), sf::Color(0, 190, 230), 0, 0.4},
+        {sf::Color(0, 0,255), sf::Color(0, 190, 230), 0, 0.5},
         // beach
-        {sf::Color(210,180,140),  sf::Color(238, 214, 175), 0.4, 0.45},
+        {sf::Color(210,180,140),  sf::Color(238, 214, 175), 0.5, 0.55},
         // green
-        {sf::Color(34,139,34), sf::Color(0,100,0), 0.45, 0.55},
+        {sf::Color(34,139,34), sf::Color(0,100,0), 0.55, 0.7},
         // moutain
-        {sf::Color(139, 137, 137), sf::Color(170, 170, 170), 0.55, 0.7},
+        {sf::Color(139, 137, 137), sf::Color(170, 170, 170), 0.7, 0.9},
         // neige
-        {sf::Color(180, 180, 180), sf::Color(255, 255, 255), 0.7, 1.0}
+        {sf::Color(180, 180, 180), sf::Color(255, 255, 255), 0.9, 1.0}
 };
 
 void PerlinNoise::calculateNoise()
