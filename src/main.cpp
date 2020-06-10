@@ -9,7 +9,24 @@ bool speedMore = false;
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(800, 600), "SFML window");
-    PerlinNoise perlinNoise;
+    PerlinNoise perlinNoise(sf::Vector2u(400, 400));
+
+    perlinNoise.setLayers({
+        // water
+        {sf::Color(0, 0,255), sf::Color(0, 190, 230), 0, 0.6},
+        // beach
+        {sf::Color(210,180,140),  sf::Color(238, 214, 175), 0.6, 0.65},
+        // green
+        {sf::Color(34,139,34), sf::Color(0,100,0), 0.65, 0.75},
+        // dirt
+        {sf::Color(90, 50, 15), sf::Color(68, 39, 12), 0.75, 0.83},
+        // moutain
+        {sf::Color(139, 137, 137), sf::Color(170, 170, 170), 0.83, 0.9},
+        // neige
+        {sf::Color(180, 180, 180), sf::Color(255, 255, 255), 0.9, 1.0}
+    });
+
+    perlinNoise.setNoiseType(NoiseType::Improved);
 
     while (window.isOpen()) {
         sf::Event event;
@@ -20,8 +37,11 @@ int main()
                 if (event.mouseWheelScroll.delta < 0) {
                     if (perlinNoise.getResolution() - resolution > 0)
                         perlinNoise.setResolution(perlinNoise.getResolution() - resolution);
-                } else
+                    perlinNoise.setFrequency(perlinNoise.getFrequency() + 1.f);
+                } else {
                     perlinNoise.setResolution(perlinNoise.getResolution() + resolution);
+                    perlinNoise.setFrequency(perlinNoise.getFrequency() - 1.f);
+                }
                 perlinNoise.calculateNoise();
             }
             if (event.type == sf::Event::KeyPressed) {
@@ -47,9 +67,11 @@ int main()
             perlinNoise.calculateNoise();
         } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
             perlinNoise.setUnit(perlinNoise.getUnit() + 0.1f);
+            perlinNoise.setOctaves(perlinNoise.getOctaves() + 1);
             perlinNoise.calculateNoise();
         } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::X)) {
             perlinNoise.setUnit(perlinNoise.getUnit() - 0.1f);
+            perlinNoise.setOctaves(perlinNoise.getOctaves() - 1);
             perlinNoise.calculateNoise();
         }
         window.clear();

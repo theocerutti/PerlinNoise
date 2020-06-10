@@ -7,21 +7,7 @@
 
 #include "math.hpp"
 
-float my::math::lerp(float a, float b, float f)
-{
-    return a + f * (b - a);
-}
-
-float my::math::clamp2bounds(float b1Min, float b1Max, float x)
-{
-    float diff = b1Min;
-    float newMax = b1Max - diff;
-    float newX = x - diff;
-
-    return ((1 / newMax) * newX);
-}
-
-sf::Color my::math::lerpColor(const sf::Color &from, const sf::Color &to, float f)
+sf::Color my::math::lerpColor(const sf::Color &from, const sf::Color &to, double f)
 {
     return (sf::Color(
             lerp(from.r, to.r, f),
