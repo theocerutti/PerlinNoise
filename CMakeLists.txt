@@ -11,6 +11,7 @@ include_directories(include)
 # Set sources
 file(GLOB_RECURSE SRCS "src/*.cpp")
 add_definitions(-g)
+add_definitions(-O3)
 
 add_executable(${BINARY_NAME} ${SRCS})
 
