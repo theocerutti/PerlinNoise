@@ -85,8 +85,11 @@ private:
     NoiseType _type{NoiseType::Classic};
     std::vector<Layer> _layers;
 
-    int grad3[12][3];
     int *permSimplex;
+public:
+    double _amplitude{0.5};
+    double _lacunarity{0.5};
+    double _persistence{0.5};
 };
 
 #endif //SORTINGVISUALIZER_PERLINNOISE_HPP

@@ -188,7 +188,7 @@ double PerlinNoise::getFrequency() const
 void PerlinNoise::setFrequency(double frequency)
 {
     _frequency = frequency;
-    _frequency = my::math::clamp(_frequency, 0.1, 64.f);
+    _frequency = my::math::clamp(_frequency, 0, 1024.f);
 }
 
 const NoiseType &PerlinNoise::getNoiseType() const
@@ -306,16 +306,20 @@ double PerlinNoise::simplexNoiseImpl(double x, double y) const
 
 double PerlinNoise::simplexNoise(double x, double y) const
 {
-    x /= (_size.x / _frequency);
-    y /= (_size.y / _frequency);
-    double result = 0;
-    double amp = 1;
+    double output = 0.f;
+    double denom  = 0.f;
+    double frequency = _frequency;
+    double amplitude = _amplitude;
+    double lacunarity = _lacunarity;
+    double persistence = _persistence;
 
-    for (std::int32_t i = 0; i < _octaves; ++i) {
-        result += simplexNoiseImpl(x, y) * amp;
-        x *= 2;
-        y *= 2;
-        amp /= 2;
+    for (size_t i = 0; i < _octaves; i++) {
+        output += (amplitude * simplexNoiseImpl((x / 800) * frequency, (y / 600)  * frequency));
+        denom += amplitude;
+
+        frequency *= lacunarity;
+        amplitude *= persistence;
     }
-    return (my::math::clamp(result, 0, 1));
+
+    return (output / denom);
 }

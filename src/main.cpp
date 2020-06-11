@@ -11,7 +11,7 @@ int main()
     sf::RenderWindow window(sf::VideoMode(800, 600), "SFML window");
     PerlinNoise perlinNoise(sf::Vector2u(800, 600));
 
-    /*perlinNoise.setLayers({
+    perlinNoise.setLayers({
         // water
         {sf::Color(0, 0,255), sf::Color(0, 190, 230), 0, 0.6},
         // beach
@@ -24,9 +24,9 @@ int main()
         {sf::Color(139, 137, 137), sf::Color(170, 170, 170), 0.83, 0.9},
         // neige
         {sf::Color(180, 180, 180), sf::Color(255, 255, 255), 0.9, 1.0}
-    });*/
+    });
 
-    perlinNoise.setNoiseType(NoiseType::Simplex);
+    perlinNoise.setNoiseType(NoiseType::Improved);
 
     while (window.isOpen()) {
         sf::Event event;
@@ -37,10 +37,10 @@ int main()
                 if (event.mouseWheelScroll.delta < 0) {
                     if (perlinNoise.getResolution() - resolution > 0)
                         perlinNoise.setResolution(perlinNoise.getResolution() - resolution);
-                    perlinNoise.setFrequency(perlinNoise.getFrequency() + 1.f);
+                    perlinNoise.setFrequency(perlinNoise.getFrequency() + 0.5f);
                 } else {
                     perlinNoise.setResolution(perlinNoise.getResolution() + resolution);
-                    perlinNoise.setFrequency(perlinNoise.getFrequency() - 1.f);
+                    perlinNoise.setFrequency(perlinNoise.getFrequency() - 0.5f);
                 }
                 perlinNoise.calculateNoise();
             }
@@ -72,6 +72,24 @@ int main()
         } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::X)) {
             perlinNoise.setUnit(perlinNoise.getUnit() - 0.1f);
             perlinNoise.setOctaves(perlinNoise.getOctaves() - 1);
+            perlinNoise.calculateNoise();
+        } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::C)) {
+            perlinNoise._amplitude += 0.5f;
+            perlinNoise.calculateNoise();
+        } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::V)) {
+            perlinNoise._amplitude -= 0.5f;
+            perlinNoise.calculateNoise();
+        } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::F)) {
+            perlinNoise._lacunarity += 0.5f;
+            perlinNoise.calculateNoise();
+        } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::G)) {
+            perlinNoise._lacunarity -= 0.5f;
+            perlinNoise.calculateNoise();
+        } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::T)) {
+            perlinNoise._persistence += 0.5f;
+            perlinNoise.calculateNoise();
+        } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Y)) {
+            perlinNoise._persistence -= 0.5f;
             perlinNoise.calculateNoise();
         }
         window.clear();
