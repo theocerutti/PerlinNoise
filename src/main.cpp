@@ -9,9 +9,9 @@ bool speedMore = false;
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(800, 600), "SFML window");
-    PerlinNoise perlinNoise(sf::Vector2u(400, 400));
+    PerlinNoise perlinNoise(sf::Vector2u(800, 600));
 
-    perlinNoise.setLayers({
+    /*perlinNoise.setLayers({
         // water
         {sf::Color(0, 0,255), sf::Color(0, 190, 230), 0, 0.6},
         // beach
@@ -24,9 +24,9 @@ int main()
         {sf::Color(139, 137, 137), sf::Color(170, 170, 170), 0.83, 0.9},
         // neige
         {sf::Color(180, 180, 180), sf::Color(255, 255, 255), 0.9, 1.0}
-    });
+    });*/
 
-    perlinNoise.setNoiseType(NoiseType::Improved);
+    perlinNoise.setNoiseType(NoiseType::Simplex);
 
     while (window.isOpen()) {
         sf::Event event;

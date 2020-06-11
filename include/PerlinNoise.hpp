@@ -40,8 +40,13 @@ public:
     void calculateNoise();
     double noiseFromType(int x, int y) const;
     float classicNoise2D(int x, int y) const;
+
     double improvedNoise2D(double x, double y) const;
     double improvedNoiseImpl(double x, double y, double z) const;
+
+    double simplexNoise(double x, double y) const;
+    double simplexNoiseImpl(double x, double y) const;
+    void initSimplex();
 
     const sf::VertexArray &getVertices() const;
 
@@ -79,6 +84,9 @@ private:
     std::uint32_t _seed;
     NoiseType _type{NoiseType::Classic};
     std::vector<Layer> _layers;
+
+    int grad3[12][3];
+    int *permSimplex;
 };
 
 #endif //SORTINGVISUALIZER_PERLINNOISE_HPP

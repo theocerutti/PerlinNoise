@@ -46,6 +46,10 @@ namespace my {
         {
             return std::max(lower, std::min(n, upper));
         }
+
+        int constexpr fastfloor(double x) {
+            return (x > 0 ? (int)x : (int)x - 1);
+        }
     }
 }
 
