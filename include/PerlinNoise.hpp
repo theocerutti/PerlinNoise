@@ -37,7 +37,9 @@ class PerlinNoise {
 public:
     PerlinNoise(const sf::Vector2u &size, std::uint32_t seed);
     PerlinNoise(const sf::Vector2u &size);
+    ~PerlinNoise();
     void calculateNoise();
+
     double noiseFromType(int x, int y) const;
     float classicNoise2D(int x, int y) const;
 
@@ -46,9 +48,8 @@ public:
 
     double simplexNoise(double x, double y) const;
     double simplexNoiseImpl(double x, double y) const;
-    void initSimplex();
 
-    const sf::VertexArray &getVertices() const;
+    const sf::Vertex *getVertices() const;
 
     float getResolution() const;
     void setResolution(float resolution);
@@ -70,9 +71,18 @@ public:
     void addLayer(const Layer &layer);
     void setLayers(const std::vector<Layer> &layers);
     const std::vector<Layer> &getLayers() const;
+
+    void setNeedToRedraw(bool redraw);
+    bool needToRedraw() const;
+
+    const sf::Vector2u &getSize() const;
+    void setSize(const sf::Vector2u &size);
+
+    std::size_t getVertexCount() const;
 private:
+    bool _needToRedraw{true};
     sf::Vector2u _size;
-    sf::VertexArray _vertices;
+    sf::Vertex *_vertices;
     float _resolution{100.f}; // zoom
     float _unit{1};
     sf::Vector2i _pos{0, 0};
@@ -84,8 +94,6 @@ private:
     std::uint32_t _seed;
     NoiseType _type{NoiseType::Classic};
     std::vector<Layer> _layers;
-
-    int *permSimplex;
 public:
     double _amplitude{0.5};
     double _lacunarity{0.5};
