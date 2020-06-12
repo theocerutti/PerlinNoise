@@ -8,10 +8,11 @@ bool speedMore = false;
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(800, 600), "SFML window");
+    sf::Clock deltaClock;
     PerlinNoise perlinNoise(sf::Vector2u(800, 600));
+    sf::RenderWindow window(sf::VideoMode(800, 600), "SFML window");
 
-    perlinNoise.setLayers({
+    /*perlinNoise.setLayers({
         // water
         {sf::Color(0, 0,255), sf::Color(0, 190, 230), 0, 0.6},
         // beach
@@ -24,7 +25,7 @@ int main()
         {sf::Color(139, 137, 137), sf::Color(170, 170, 170), 0.83, 0.9},
         // neige
         {sf::Color(180, 180, 180), sf::Color(255, 255, 255), 0.9, 1.0}
-    });
+    });*/
 
     perlinNoise.setNoiseType(NoiseType::Improved);
 
@@ -86,14 +87,16 @@ int main()
             perlinNoise._lacunarity -= 0.5f;
             perlinNoise.calculateNoise();
         } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::T)) {
-            perlinNoise._persistence += 0.5f;
+            perlinNoise._persistence -= 0.1f;
             perlinNoise.calculateNoise();
         } else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Y)) {
-            perlinNoise._persistence -= 0.5f;
+            perlinNoise._persistence += 0.1f;
             perlinNoise.calculateNoise();
         }
-        window.clear();
-        window.draw(perlinNoise.getVertices());
+        if (perlinNoise.needToRedraw()) {
+            window.clear();
+            window.draw(perlinNoise.getVertices(), perlinNoise.getVertexCount(), sf::Points);
+        }
         window.display();
     }
     return EXIT_SUCCESS;

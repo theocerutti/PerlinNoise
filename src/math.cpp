@@ -15,3 +15,10 @@ sf::Color my::math::lerpColor(const sf::Color &from, const sf::Color &to, double
             lerp(from.b, to.b, f)
     ));
 }
+
+void my::math::fastLerpColor(sf::Color &result, const sf::Color &from, const sf::Color &to, double f)
+{
+    result.r = lerp(from.r, to.r, f);
+    result.g = lerp(from.g, to.g, f);
+    result.b = lerp(from.b, to.b, f);
+}

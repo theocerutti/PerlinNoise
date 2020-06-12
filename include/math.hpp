@@ -29,6 +29,8 @@ namespace my {
 
         sf::Color lerpColor(const sf::Color &from, const sf::Color &to, double f);
 
+        void fastLerpColor(sf::Color &result, const sf::Color &from, const sf::Color &to, double f);
+
         double constexpr fade(double t)
         {
             return t * t * t * (t * (t * 6 - 15) + 10);
@@ -47,8 +49,14 @@ namespace my {
             return std::max(lower, std::min(n, upper));
         }
 
-        int constexpr fastfloor(double x) {
+        int constexpr fastfloor(double x)
+        {
             return (x > 0 ? (int)x : (int)x - 1);
+        }
+
+        double constexpr dot(int const g[3], double x, double y)
+        {
+            return (g[0] * x + g[1] * y);
         }
     }
 }
