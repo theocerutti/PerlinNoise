@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.11)
 
-project(SortingVisualizer)
+project(PerlinNoise)
 set(BINARY_NAME perlin_noise)
 
 # Append cmake directory to module path
