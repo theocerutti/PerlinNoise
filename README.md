@@ -1,6 +1,6 @@
 # PerlinNoise
 
-Implentation of 3 differents noise : Basic, Improved, and Simplex.
+Implentation of 3 differents noises : Basic, Improved, and Simplex.
 
 Example of Simplex noise:
 
